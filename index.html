@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>چک‌لیست تست وب‌سایت مولتی‌شاپ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-right: 5px solid #3498db;
+            padding-right: 15px;
+            margin: 25px 0 15px;
+        }
+        
+        h3 {
+            color: #2c3e50;
+            margin: 20px 0 10px;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            max-width: 900px;
+            margin: 0 auto;
+            color: #ecf0f1;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .main-content {
+            flex: 3;
+            min-width: 300px;
+        }
+        
+        .sidebar {
+            flex: 1;
+            min-width: 280px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .test-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .test-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .test-item:hover {
+            background-color: #f9f9f9;
+            border-color: #3498db;
+        }
+        
+        .test-item.completed {
+            background-color: #f0fff4;
+            border-color: #27ae60;
+        }
+        
+        .test-checkbox {
+            margin-left: 15px;
+            margin-top: 3px;
+            transform: scale(1.3);
+            cursor: pointer;
+        }
+        
+        .test-content {
+            flex: 1;
+        }
+        
+        .test-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .test-desc {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .test-priority {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        .priority-high {
+            background-color: #ffeaea;
+            color: #e74c3c;
+        }
+        
+        .priority-medium {
+            background-color: #fff4e6;
+            color: #f39c12;
+        }
+        
+        .priority-low {
+            background-color: #e6f7ff;
+            color: #3498db;
+        }
+        
+        .progress-container {
+            background-color: #f0f3f7;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2ecc71, #1abc9c);
+            width: 0%;
+            transition: width 0.8s ease;
+            border-radius: 10px;
+        }
+        
+        .progress-text {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-report {
+            background-color: #e74c3c;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .btn-report:hover {
+            background-color: #c0392b;
+        }
+        
+        .bug-report {
+            background-color: #fff9e6;
+            border: 1px dashed #f1c40f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+        
+        .bug-report h3 {
+            color: #d35400;
+            margin-bottom: 15px;
+        }
+        
+        textarea, input, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            resize: vertical;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            min-width: 120px;
+        }
+        
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .role-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .role-btn {
+            padding: 10px 20px;
+            background-color: #ecf0f1;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .role-btn.active {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .test-info {
+            background-color: #e8f4fc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>چک‌لیست تست وب‌سایت مولتی‌شاپ</h1>
+        <p class="description">این چک‌لیست برای تست کامل عملکرد وب‌سایت مولتی‌شاپ طراحی شده است. هر بخش را پس از تست علامت بزنید و در صورت یافتن باگ، آن را در قسمت پایین گزارش کنید.</p>
+    </header>
+    
+    <div class="role-selector">
+        <button class="role-btn active" data-role="all">همه تست‌ها</button>
+        <button class="role-btn" data-role="user">کاربر عادی</button>
+        <button class="role-btn" data-role="seller">فروشنده</button>
+        <button class="role-btn" data-role="tester">تست فنی</button>
+    </div>
+    
+    <div class="progress-container">
+        <h3>پیشرفت تست</h3>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text">
+            <span id="completedCount">0</span> از <span id="totalCount">0</span> مورد تست تکمیل شده (<span id="progressPercent">0%</span>)
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="test-info">
+                <h3><i class="fas fa-info-circle"></i> راهنمای تست</h3>
+                <p>تست‌کننده می‌تواند در سه نقش مختلف عمل کند: <strong>کاربر عادی</strong> (مشتری سایت)، <strong>فروشنده</strong> (مدیر فروشگاه) و <strong>تست فنی</strong> (بررسی امنیت و عملکرد). هر مورد تست را پس از بررسی علامت بزنید.</p>
+            </div>
+            
+            <div class="test-section" data-role="seller">
+                <h2><i class="fas fa-user-check"></i> 1️⃣ احراز هویت و کاربران</h2>
+                <div class="test-item" data-priority="high">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">ثبت‌نام کاربر جدید</div>
+                        <div class="test-desc">تست فرم ثبت‌نام با اطلاعات معتبر و نامعتبر، بررسی تایید ایمیل/شماره تلفن، ثبت‌نام با ایمیل تکراری</div>
+                        <span class="test-priority priority-high">اولویت بالا</span>
+                    </div>
+                </div>
+                <div class="test-item" data-priority="high">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">ورود / خروج</div>
+                        <div class="test-desc">تست ورود با رمز عبور صحیح و ناصحیح، بازیابی رمز عبور، خروج از حساب کاربری</div>
+                        <span class="test-priority priority-high">اولویت بالا</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="test-section" data-role="seller">
+                <h2><i class="fas fa-store"></i> 2️⃣ پنل فروشنده (Shop Dashboard)</h2>
+                <div class="test-item" data-priority="high">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">ساخت فروشگاه جدید</div>
+                        <div class="test-desc">تست فرآیند ایجاد فروشگاه، انتخاب دسته‌بندی، آپلود لوگو و پر کردن تمام فیلدهای الزامی</div>
+                        <span class="test-priority priority-high">اولویت بالا</span>
+                    </div>
+                </div>
+                <div class="test-item" data-priority="medium">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">ویرایش اطلاعات فروشگاه</div>
+                        <div class="test-desc">تست ویرایش اطلاعات فروشگاه پس از ایجاد، تغییر آدرس، شماره تماس، توضیحات و غیره</div>
+                        <span class="test-priority priority-medium">اولویت متوسط</span>
+                    </div>
+                </div>
+                <div class="test-item" data-priority="medium">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">فعال / غیرفعال کردن فروشگاه</div>
+                        <div class="test-desc">تست امکان غیرفعال کردن موقت فروشگاه و تأثیر آن بر نمایش محصولات</div>
+                        <span class="test-priority priority-medium">اولویت متوسط</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="test-section" data-role="seller">
+                <h2><i class="fas fa-box-open"></i> 3️⃣ مدیریت محصولات</h2>
+                <div class="test-item" data-priority="high">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">افزودن محصول جدید</div>
+                        <div class="test-desc">تست فرم افزودن محصول با تمام اطلاعات (نام، دسته‌بندی، قیمت، موجودی، توضیحات و ...)</div>
+                        <span class="test-priority priority-high">اولویت بالا</span>
+                    </div>
+                </div>
+                <div class="test-item" data-priority="medium">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">بارگذاری تصویر محصول</div>
+                        <div class="test-desc">تست آپلود تصویر، فرمت‌های مجاز، اندازه فایل، نمایش پیش‌نمایش و حذف تصویر</div>
+                        <span class="test-priority priority-medium">اولویت متوسط</span>
+                    </div>
+                </div>
+                <div class="test-item" data-priority="low">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">قیمت‌گذاری و تخفیف</div>
+                        <div class="test-desc">تست قیمت‌گذاری، تخفیف درصدی و مبلغی، تاریخ شروع و پایان تخفیف</div>
+                        <span class="test-priority priority-low">اولویت پایین</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="test-section" data-role="user">
+                <h2><i class="fas fa-shopping-cart"></i> 4️⃣ صفحه محصولات (سمت کاربر)</h2>
+                <div class="test-item" data-priority="high">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">نمایش صحیح اطلاعات محصول</div>
+                        <div class="test-desc">تست نمایش اطلاعات کامل محصول شامل نام، قیمت، تخفیف، موجودی و توضیحات</div>
+                        <span class="test-priority priority-high">اولویت بالا</span>
+                    </div>
+                </div>
+                <div class="test-item" data-priority="high">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">افزودن به سبد خرید</div>
+                        <div class="test-desc">تست افزودن محصول به سبد خرید در حالت لاگین و بدون لاگین</div>
+                        <span class="test-priority priority-high">اولویت بالا</span>
+                    </div>
+                </div>
+                <div class="test-item" data-priority="medium">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">محدودیت تعداد خرید</div>
+                        <div class="test-desc">تست محدودیت خرید بر اساس موجودی انبار و تعداد مجاز خرید برای هر کاربر</div>
+                        <span class="test-priority priority-medium">اولویت متوسط</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="test-section" data-role="user seller">
+                <h2><i class="fas fa-clipboard-list"></i> 5️⃣ سبد خرید و سفارش</h2>
+                <div class="test-item" data-priority="high">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">محاسبه صحیح قیمت نهایی</div>
+                        <div class="test-desc">تست محاسبه قیمت با احتساب تخفیف‌ها، مالیات و هزینه ارسال</div>
+                        <span class="test-priority priority-high">اولویت بالا</span>
+                    </div>
+                </div>
+                <div class="test-item" data-priority="high">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">ثبت سفارش</div>
+                        <div class="test-desc">تست فرآیند کامل ثبت سفارش از سبد خرید تا تأیید نهایی</div>
+                        <span class="test-priority priority-high">اولویت بالا</span>
+                    </div>
+                </div>
+                <div class="test-item" data-priority="medium">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">وضعیت‌های سفارش</div>
+                        <div class="test-desc">تست تغییر وضعیت سفارش (در انتظار، پرداخت شده، ارسال شده، تحویل داده شده، لغو شده)</div>
+                        <span class="test-priority priority-medium">اولویت متوسط</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="test-section" data-role="tester">
+                <h2><i class="fas fa-shield-alt"></i> 9️⃣ ارورها و امنیت</h2>
+                <div class="test-item" data-priority="high">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">نمایش پیام خطای مناسب</div>
+                        <div class="test-desc">تست نمایش پیام خطای کاربرپسند در شرایط مختلف (اتصال به سرور، اعتبارسنجی فرم و ...)</div>
+                        <span class="test-priority priority-high">اولویت بالا</span>
+                    </div>
+                </div>
+                <div class="test-item" data-priority="high">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">تست ورودی‌های غیرمجاز</div>
+                        <div class="test-desc">تست ورود داده‌های نامعتبر در فرم‌ها (XSS، SQL Injection، مقادیر غیرمجاز)</div>
+                        <span class="test-priority priority-high">اولویت بالا</span>
+                    </div>
+                </div>
+                <div class="test-item" data-priority="medium">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">بررسی XSS / HTML Inject</div>
+                        <div class="test-desc">تست تزریق کد HTML/JS در قسمت‌های متنی مانند توضیحات محصول</div>
+                        <span class="test-priority priority-medium">اولویت متوسط</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="test-section" data-role="tester">
+                <h2><i class="fas fa-tachometer-alt"></i> 🔟 عملکرد و سرعت</h2>
+                <div class="test-item" data-priority="medium">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">سرعت لود صفحات</div>
+                        <div class="test-desc">تست زمان لود صفحات اصلی سایت در دستگاه‌ها و اتصالات مختلف</div>
+                        <span class="test-priority priority-medium">اولویت متوسط</span>
+                    </div>
+                </div>
+                <div class="test-item" data-priority="medium">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">تأخیر در APIها</div>
+                        <div class="test-desc">تست زمان پاسخگویی APIهای اصلی سایت و رفتار در حالت Slow Connection</div>
+                        <span class="test-priority priority-medium">اولویت متوسط</span>
+                    </div>
+                </div>
+                <div class="test-item" data-priority="low">
+                    <input type="checkbox" class="test-checkbox">
+                    <div class="test-content">
+                        <div class="test-title">رفتار سایت در اینترنت ضعیف</div>
+                        <div class="test-desc">تست عملکرد سایت در شرایط اتصال ضعیف و قطعی اینترنت</div>
+                        <span class="test-priority priority-low">اولویت پایین</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="totalTests">23</div>
+                    <div class="stat-label">کل تست‌ها</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="completedTests">0</div>
+                    <div class="stat-label">تکمیل شده</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="remainingTests">23</div>
+                    <div class="stat-label">باقی‌مانده</div>
+                </div>
+            </div>
+            
+            <button class="btn" id="resetBtn"><i class="fas fa-redo"></i> ریست کردن چک‌لیست</button>
+            <button class="btn" id="saveBtn"><i class="fas fa-save"></i> ذخیره وضعیت</button>
+            <button class="btn" id="exportBtn"><i class="fas fa-file-export"></i> خروجی گزارش</button>
+            
+            <div class="bug-report">
+                <h3><i class="fas fa-bug"></i> گزارش باگ</h3>
+                <label for="bugPage">صفحه مربوطه:</label>
+                <input type="text" id="bugPage" placeholder="مثال: صفحه محصولات / سبد خرید">
+                
+                <label for="bugDesc">شرح مشکل:</label>
+                <textarea id="bugDesc" rows="4" placeholder="مشکل را به طور دقیق شرح دهید..."></textarea>
+                
+                <label for="bugSteps">مراحل تکرار:</label>
+                <textarea id="bugSteps" rows="3" placeholder="مراحل دقیق برای تکرار باگ را بنویسید..."></textarea>
+                
+                <label for="bugDevice">مرورگر و دستگاه:</label>
+                <input type="text" id="bugDevice" placeholder="مثال: Chrome v96, Android 11">
+                
+                <label for="bugPriority">اولویت باگ:</label>
+                <select id="bugPriority">
+                    <option value="critical">بحرانی</option>
+                    <option value="high">بالا</option>
+                    <option value="medium" selected>متوسط</option>
+                    <option value="low">پایین</option>
+                </select>
+                
+                <button class="btn btn-report" id="submitBug"><i class="fas fa-paper-plane"></i> ثبت گزارش باگ</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>چک‌لیست تست وب‌سایت مولتی‌شاپ | طراحی شده برای تیم‌های کنترل کیفیت</p>
+        <p>نسخه ۱.۰ | آخرین به‌روزرسانی: دی ۱۴۰۲</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // تعداد کل تست‌ها
+            const totalTests = document.querySelectorAll('.test-checkbox').length;
+            document.getElementById('totalTests').textContent = totalTests;
+            document.getElementById('totalCount').textContent = totalTests;
+            document.getElementById('remainingTests').textContent = totalTests;
+            
+            // بارگذاری وضعیت ذخیره شده
+            loadSavedState();
+            
+            // به‌روزرسانی پیشرفت
+            updateProgress();
+            
+            // رویداد برای چک‌باکس‌ها
+            document.querySelectorAll('.test-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const testItem = this.closest('.test-item');
+                    if (this.checked) {
+                        testItem.classList.add('completed');
+                    } else {
+                        testItem.classList.remove('completed');
+                    }
+                    updateProgress();
+                    saveState();
+                });
+            });
+            
+            // دکمه‌های نقش‌ها
+            document.querySelectorAll('.role-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const role = this.getAttribute('data-role');
+                    filterTestsByRole(role);
+                });
+            });
+            
+            // دکمه ریست
+            document.getElementById('resetBtn').addEventListener('click', function() {
+                if (confirm('آیا از ریست کردن تمام تست‌ها اطمینان دارید؟')) {
+                    document.querySelectorAll('.test-checkbox').forEach(checkbox => {
+                        checkbox.checked = false;
+                        checkbox.closest('.test-item').classList.remove('completed');
+                    });
+                    updateProgress();
+                    saveState();
+                }
+            });
+            
+            // دکمه ذخیره
+            document.getElementById('saveBtn').addEventListener('click', function() {
+                saveState();
+                alert('وضعیت چک‌لیست ذخیره شد.');
+            });
+            
+            // دکمه خروجی گزارش
+            document.getElementById('exportBtn').addEventListener('click', function() {
+                exportReport();
+            });
+            
+            // دکمه ثبت باگ
+            document.getElementById('submitBug').addEventListener('click', function() {
+                submitBugReport();
+            });
+            
+            // تابع به‌روزرسانی پیشرفت
+            function updateProgress() {
+                const completed = document.querySelectorAll('.test-checkbox:checked').length;
+                const percent = totalTests > 0 ? Math.round((completed / totalTests) * 100) : 0;
+                
+                document.getElementById('completedCount').textContent = completed;
+                document.getElementById('completedTests').textContent = completed;
+                document.getElementById('remainingTests').textContent = totalTests - completed;
+                document.getElementById('progressPercent').textContent = percent + '%';
+                document.getElementById('progressFill').style.width = percent + '%';
+            }
+            
+            // تابع فیلتر تست‌ها بر اساس نقش
+            function filterTestsByRole(role) {
+                document.querySelectorAll('.test-section').forEach(section => {
+                    if (role === 'all' || section.getAttribute('data-role').includes(role)) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            }
+            
+            // تابع ذخیره وضعیت در localStorage
+            function saveState() {
+                const state = {};
+                document.querySelectorAll('.test-checkbox').forEach((checkbox, index) => {
+                    state[index] = checkbox.checked;
+                });
+                localStorage.setItem('multishop-test-checklist', JSON.stringify(state));
+            }
+            
+            // تابع بارگذاری وضعیت ذخیره شده
+            function loadSavedState() {
+                const savedState = localStorage.getItem('multishop-test-checklist');
+                if (savedState) {
+                    const state = JSON.parse(savedState);
+                    document.querySelectorAll('.test-checkbox').forEach((checkbox, index) => {
+                        if (state[index]) {
+                            checkbox.checked = true;
+                            checkbox.closest('.test-item').classList.add('completed');
+                        }
+                    });
+                    updateProgress();
+                }
+            }
+            
+            // تابع ثبت گزارش باگ
+            function submitBugReport() {
+                const bugPage = document.getElementById('bugPage').value.trim();
+                const bugDesc = document.getElementById('bugDesc').value.trim();
+                const bugSteps = document.getElementById('bugSteps').value.trim();
+                const bugDevice = document.getElementById('bugDevice').value.trim();
+                const bugPriority = document.getElementById('bugPriority').value;
+                
+                if (!bugPage || !bugDesc || !bugSteps || !bugDevice) {
+                    alert('لطفاً تمام فیلدهای گزارش باگ را پر کنید.');
+                    return;
+                }
+                
+                const bugReport = {
+                    page: bugPage,
+                    description: bugDesc,
+                    steps: bugSteps,
+                    device: bugDevice,
+                    priority: bugPriority,
+                    timestamp: new Date().toLocaleString('fa-IR')
+                };
+                
+                // ذخیره در localStorage
+                let bugReports = JSON.parse(localStorage.getItem('multishop-bug-reports') || '[]');
+                bugReports.push(bugReport);
+                localStorage.setItem('multishop-bug-reports', JSON.stringify(bugReports));
+                
+                // پاک کردن فرم
+                document.getElementById('bugPage').value = '';
+                document.getElementById('bugDesc').value = '';
+                document.getElementById('bugSteps').value = '';
+                document.getElementById('bugDevice').value = '';
+                
+                alert('گزارش باگ با موفقیت ثبت شد. شماره گزارش: ' + bugReports.length);
+            }
+            
+            // تابع خروجی گزارش
+            function exportReport() {
+                const completed = document.querySelectorAll('.test-checkbox:checked').length;
+                const percent = Math.round((completed / totalTests) * 100);
+                
+                let report = `گزارش تست وب‌سایت مولتی‌شاپ\n`;
+                report += `تاریخ: ${new Date().toLocaleString('fa-IR')}\n`;
+                report += `وضعیت: ${completed} از ${totalTests} تست تکمیل شده (${percent}%)\n\n`;
+                report += `--- تست‌های تکمیل شده ---\n`;
+                
+                document.querySelectorAll('.test-section').forEach(section => {
+                    const sectionTitle = section.querySelector('h2').textContent;
+                    report += `\n${sectionTitle}\n`;
+                    
+                    section.querySelectorAll('.test-item.completed').forEach(item => {
+                        const testTitle = item.querySelector('.test-title').textContent;
+                        report += `✅ ${testTitle}\n`;
+                    });
+                });
+                
+                report += `\n--- تست‌های باقی‌مانده ---\n`;
+                
+                document.querySelectorAll('.test-section').forEach(section => {
+                    section.querySelectorAll('.test-item:not(.completed)').forEach(item => {
+                        const testTitle = item.querySelector('.test-title').textContent;
+                        const priority = item.querySelector('.test-priority').textContent;
+                        report += `⏳ ${testTitle} (${priority})\n`;
+                    });
+                });
+                
+                // نمایش گزارش در alert
+                alert(report);
+                
+                // همچنین می‌توان آن را در یک فایل ذخیره کرد
+                const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `multishop-test-report-${new Date().toISOString().slice(0,10)}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+        });
+    </script>
+</body>
+</html>
